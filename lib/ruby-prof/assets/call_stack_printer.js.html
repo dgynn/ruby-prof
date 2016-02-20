@@ -1,4 +1,5 @@
 <script type="text/javascript">
+//<![CDATA[
   /*
    Copyright (C) 2005,2009  Stefan Kaes
    skaes@railsexpress.de
@@ -209,8 +210,8 @@
   function selectNode(node, event) {
     if (event) {
       event.cancelBubble = true;
-      thread = findThread(node);
-      selectThread(thread);
+      selectedThread = findThread(node);
+      selectThread(selectedThread);
     }
     if (selectedNode) {
       selectedNode.style.background = selectedColor;
@@ -297,6 +298,7 @@
     selectNode(currentThread);
   }
 
+  var currentThread = null;
   var currentThreadIndex = null;
 
   function findThread(node){
@@ -320,7 +322,7 @@
     if (currentThreadIndex==threads.length-1)
       currentThreadIndex = 0;
     else
-      currentThreadIndex += 1
+      currentThreadIndex += 1;
     currentThread = threads[currentThreadIndex].firstChild;
     selectNode(currentThread, null);
   }
@@ -330,7 +332,7 @@
     if (currentThreadIndex==0)
       currentThreadIndex = threads.length-1;
     else
-      currentThreadIndex -= 1
+      currentThreadIndex -= 1;
     currentThread = threads[currentThreadIndex].firstChild;
     selectNode(currentThread, null);
   }
@@ -367,7 +369,7 @@
         img.onclick = function(event){ toggleChildren(this, event); return false; };
     }
     var divs = document.getElementsByTagName("div");
-    for (i=0; i<divs.length; i++) {
+    for (var i=0; i<divs.length; i++) {
       var div = divs[i];
       if (div.className == "thread")
         div.onclick = function(event){ switchThread(this, event) };
@@ -376,10 +378,10 @@
     for (var i=0; i<lis.length; i++) {
       lis[i].onclick = function(event){ selectNode(this, event); };
     }
-    var threads = document.getElementsByName("thread");;
+    var threads = document.getElementsByName("thread");
     currentThreadIndex = 0;
     currentThread = threads[0].firstChild;
     selectNode(currentThread, null);
   };
-
+//]]>
 </script>
